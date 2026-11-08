@@ -1,7 +1,7 @@
 name: astrbot_plugin_active_chat
 display_name: 群聊主动消息
 desc: 让bot在群聊主动说话，静默触发、概率递增判定、可选截屏主动消息（需桌面环境）
-version: v1.0.0
-author: DSH
+version: v1.0.1
+author: miduo
 astrbot_version: ">=4.5.7"
 repo: https://github.com/miduo514/astrbot_plugin_active_chat
