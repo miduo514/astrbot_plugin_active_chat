@@ -156,11 +156,12 @@ class GroupState:
     closed: bool = False
 
     def mark_message(self) -> None:
-        """收到新消息：重置静默计时、退出候选态并唤醒等待中的协程。"""
+        """收到新消息：重置静默计时、退出候选态、连续失败次数 B 归零。"""
         self.last_activity = time.monotonic()
         self.candidate = False
         self.round = 0
         self.next_check_at = None
+        self.fail_count = 0
         self.wake.set()
 
     def probability(self, config: RuntimeConfig) -> float:
