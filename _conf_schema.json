@@ -1,0 +1,68 @@
+{
+  "group_umos": {
+    "description": "需要监控的群聊会话 UMO 列表",
+    "type": "list",
+    "hint": "在目标群发送 /sid 可获取，形如 default:GroupMessage:123456789。多个会话请以 JSON 数组填写。",
+    "default": []
+  },
+  "silence_minutes": {
+    "description": "静默触发阈值 X（分钟）",
+    "type": "int",
+    "default": 10,
+    "hint": "范围 1~120。群内连续无新消息达到该时长后进入候选状态。"
+  },
+  "check_interval_min": {
+    "description": "判定间隔下限 Y（分钟）",
+    "type": "int",
+    "default": 5,
+    "hint": "范围 1~60。进入候选状态后，每隔 Y~Z 分钟随机进行一次概率判定。"
+  },
+  "check_interval_max": {
+    "description": "判定间隔上限 Z（分钟）",
+    "type": "int",
+    "default": 10,
+    "hint": "范围 1~60。若小于 Y 会自动交换。"
+  },
+  "base_probability": {
+    "description": "初始判定概率 A",
+    "type": "float",
+    "default": 0.1,
+    "hint": "范围 0~1。实际概率 = min(1, A + B × C)，B 为连续失败次数。"
+  },
+  "failure_increment": {
+    "description": "失败增加概率 C",
+    "type": "float",
+    "default": 0.1,
+    "hint": "范围 0~1。每次判定失败后 B 加 1，下一次概率随之提高。"
+  },
+  "normal_extra_prompt": {
+    "description": "普通主动消息额外提示词（可空）",
+    "type": "text",
+    "default": "",
+    "hint": "会追加在人格 system prompt 之后，用于约束普通主动消息的风格。"
+  },
+  "inject_history": {
+    "description": "是否注入当前 LLM 对话历史",
+    "type": "bool",
+    "default": true,
+    "hint": "开启后主动消息会携带当前会话最近的对话记录；关闭则只用人格与提示词。"
+  },
+  "enable_screenshot": {
+    "description": "启用截屏主动消息",
+    "type": "bool",
+    "default": false,
+    "hint": "开启后按截屏概率 P 决定本次是否走截屏分支；截屏失败会自动回退普通主动消息。"
+  },
+  "screenshot_probability": {
+    "description": "截屏分支概率 P",
+    "type": "float",
+    "default": 0.5,
+    "hint": "范围 0~1。仅在启用截屏主动消息时生效。"
+  },
+  "screenshot_extra_prompt": {
+    "description": "截屏主动消息额外提示词（可空）",
+    "type": "text",
+    "default": "",
+    "hint": "会追加在人格 system prompt 之后，用于约束截屏主动消息的风格。"
+  }
+}
